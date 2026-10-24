@@ -1,0 +1,17 @@
+{
+  "name": "@lockjaw/celld",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "effect-tsrs diagnostics --project tsconfig.json --strict",
+    "typecheck:tsc": "tsc --noEmit -p tsconfig.json",
+    "test": "vitest run --config vitest.config.ts"
+  },
+  "dependencies": {
+    "@effect/platform-node": "4.0.5",
+    "@rat-king/alchemy-nest": "github:joelhooks/rat-king#fd780e4d14dd8e5707959a6809d4f702d8cdf43b&path:/packages/alchemy-nest",
+    "alchemy": "2.0.0-beta.83",
+    "effect": "4.0.5"
+  }
+}

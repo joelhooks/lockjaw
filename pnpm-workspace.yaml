@@ -5,6 +5,7 @@ packages:
   - "deploy/*"
 
 minimumReleaseAgeExclude:
+  - "@rat-king/alchemy-nest"
   - "@rat-king/lexicon"
   - "@yielded/effect-tsrs"
   - "@yielded/effect-tsrs-darwin-arm64"

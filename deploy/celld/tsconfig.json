@@ -1,0 +1,36 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "allowImportingTsExtensions": true,
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "plugins": [
+      {
+        "name": "@effect/language-service",
+        "ignoreEffectWarningsInTscExitCode": false,
+        "overrides": [
+          {
+            "include": ["../../packages/worker/src/**/*.ts"],
+            "options": { "diagnosticSeverity": { "asyncFunction": "off" } }
+          }
+        ],
+        "allowedUnstableApis": [
+          "@effect/platform-node/NodeServices#layer",
+          "@effect/platform-node/NodeRuntime#runMain",
+          "@effect/vitest#it",
+          "effect/FileSystem#FileSystem",
+          "effect/Path#Path",
+          "effect/http/FetchHttpClient#layer",
+          "effect/http/FetchHttpClient#Fetch",
+          "effect/http/FetchHttpClient#RequestInit",
+          "effect/http/HttpClient#HttpClient",
+          "effect/http/HttpClient#make",
+          "effect/http/HttpClientResponse#fromWeb",
+          "effect/process/ChildProcess#make",
+          "effect/process/ChildProcessSpawner#ChildProcessSpawner",
+          "effect/http/HttpClientRequest#fromWeb"
+        ]
+      }
+    ]
+  },
+  "include": ["*.ts", "test/**/*.ts"]
+}

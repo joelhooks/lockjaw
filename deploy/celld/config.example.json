@@ -1,0 +1,41 @@
+{
+  "approverDid": "did:web:operator.example.com",
+  "bucket": "example-lockjaw-cells",
+  "callerDocuments": [
+    {
+      "authentication": ["did:web:operator.example.com#key-1"],
+      "id": "did:web:operator.example.com",
+      "issuer": "example-operator",
+      "name": "example-operator",
+      "verificationMethod": [
+        {
+          "controller": "did:web:operator.example.com",
+          "id": "did:web:operator.example.com#key-1",
+          "publicKeyJwk": {
+            "crv": "Ed25519",
+            "kty": "OKP",
+            "x": "11qYAYKxCrfVS_7TyWQHOg7hcvPapiMlrwIaaPcHURo"
+          }
+        }
+      ]
+    }
+  ],
+  "cellDid": "did:web:cell.example.com",
+  "credentials": {
+    "accessKey": "EXAMPLE_S3_ACCESS_KEY",
+    "secretKey": "EXAMPLE_S3_SECRET_KEY"
+  },
+  "dataRoot": "/srv/example-lockjaw",
+  "host": {
+    "dataRoot": "/srv/example-shared",
+    "home": "/home/example",
+    "ssh": "example@celld.example.com",
+    "tailnetIPv4": "192.0.2.10"
+  },
+  "instance": "lockjaw",
+  "kek": { "kek": "EXAMPLE_LOCKJAW_KEK", "kind": "binding" },
+  "portBase": 32000,
+  "setters": ["did:web:operator.example.com"],
+  "workerName": "example-lockjaw",
+  "workerUrl": "http://192.0.2.10:32000"
+}

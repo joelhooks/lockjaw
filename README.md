@@ -2,6 +2,8 @@
 
 Lockjaw injects credentials at egress. Agents hold placeholders such as `{{secret:example/key}}`, not the credential value. A cell authenticates the caller, checks the approved host and header placement, decrypts the credential, fills the header and sends the HTTPS request. It redacts credential echoes from the upstream response.
 
+Source: [github.com/joelhooks/lockjaw](https://github.com/joelhooks/lockjaw), MIT.
+
 This is an explicit gateway, not a transparent network firewall. It does not stop an agent's other network traffic. Decryption and upstream HTTP happen inside the cell's trust boundary; the cell operator and hosting provider belong inside that boundary.
 
 ## Identity and approval
@@ -48,7 +50,7 @@ See the [Worker API](packages/worker/README.md), [credential storage](packages/c
 ## Deployment
 
 - [Cloudflare with Alchemy](deploy/cloudflare/README.md): graph and offline tests exist; **untested on a live account**. Cloudflare holds both the encrypted storage and the Worker KEK.
-- [celld with Alchemy](deploy/celld/README.md): public deployment layer coming. No deployment is performed by an export or by the checks.
+- [celld with Alchemy](deploy/celld/README.md): deploys onto an operator-owned host with an object store and KEK binding or URL mode. The operator holds both the KEK and storage. Graph and fake-provider tests run offline; **not deployed or live-proven**. No deployment is performed by an export or by the checks.
 
 ## Compared with other egress proxies
 
@@ -73,7 +75,7 @@ pnpm typecheck:tsc
 
 `pnpm fence` additionally uses an operator-owned private inventory; [fence setup](tools/fence/README.md) explains the schema and permissions. `pnpm fence:check` runs generic rules without that inventory.
 
-`@rat-king/lexicon` isn't on npm yet, so `vendor/` carries a tarball built from the public MIT [Rat King](https://github.com/joelhooks/rat-king) lexicon source, pinned by SHA-256 in `vendor/rat-king-lexicon.lock.json`. The celld deployment layer depends on `@rat-king/alchemy-nest`, which isn't published either, so it isn't included yet; see [deploy/celld](deploy/celld/README.md).
+`@rat-king/lexicon` isn't on npm yet, so `vendor/` carries a tarball built from the public MIT [Rat King](https://github.com/joelhooks/rat-king) lexicon source, pinned by SHA-256 in `vendor/rat-king-lexicon.lock.json`. The [celld deployment layer](deploy/celld/README.md) uses `@rat-king/alchemy-nest` from a pinned public Git commit and subdirectory, without a vendored tarball.
 
 ## License
 
