@@ -1,0 +1,35 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "plugins": [
+      {
+        "name": "@effect/language-service",
+        "ignoreEffectWarningsInTscExitCode": false,
+        // Durable Object and RPC boundaries must return native Promises.
+        "diagnosticSeverity": { "asyncFunction": "off" },
+        "overrides": [
+          // Tests run in Node; production Worker imports remain checked.
+          {
+            "include": ["test/**/*.ts"],
+            "options": { "diagnosticSeverity": { "nodeBuiltinImport": "off" } }
+          }
+        ],
+        // Property tests use the pinned Arbitrary schema and filter exports.
+        "allowedUnstableApis": [
+          "@effect/vitest#it",
+          "effect/http/HttpClient#HttpClient",
+          "effect/http/HttpClientRequest#fromWeb",
+          "effect/http/FetchHttpClient#RequestInit",
+          "effect/http/FetchHttpClient#layer",
+          "effect/http/FetchHttpClient#Fetch",
+          "effect/http/HttpClient#make",
+          "effect/http/HttpClientResponse#fromWeb",
+          "effect/Arbitrary#filter",
+          "effect/Arbitrary#schema"
+        ]
+      }
+    ]
+  },
+  "include": ["src/**/*.ts", "test/**/*.ts"]
+}

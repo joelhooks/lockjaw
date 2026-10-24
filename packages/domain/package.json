@@ -1,0 +1,18 @@
+{
+  "name": "@lockjaw/domain",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./errors": "./src/errors.ts"
+  },
+  "scripts": {
+    "typecheck": "effect-tsrs diagnostics --project tsconfig.json --strict",
+    "typecheck:tsc": "tsc --noEmit -p tsconfig.json",
+    "typecheck:fast": "tsrs --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "effect": "4.0.5"
+  }
+}

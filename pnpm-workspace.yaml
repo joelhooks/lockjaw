@@ -1,0 +1,14 @@
+ignoreScripts: true
+
+packages:
+  - "packages/*"
+  - "deploy/*"
+
+minimumReleaseAgeExclude:
+  - "@rat-king/lexicon"
+  - "@yielded/effect-tsrs"
+  - "@yielded/effect-tsrs-darwin-arm64"
+  - "@yielded/effect-tsrs-darwin-x64"
+  - "@yielded/effect-tsrs-linux-x64"
+  - "@yielded/effect-tsrs-linux-arm64"
+  - "@yielded/effect-tsrs-win32-x64"

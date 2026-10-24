@@ -1,0 +1,44 @@
+{
+  "name": "secret-cell",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-18",
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "CREDENTIAL",
+        "class_name": "Credential"
+      },
+      {
+        "name": "REGISTRY",
+        "class_name": "Registry"
+      },
+      {
+        "name": "REPLAY",
+        "class_name": "Replay"
+      },
+      {
+        "name": "GRANTS",
+        "class_name": "Grants"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": ["Credential", "Registry", "Replay"]
+    },
+    {
+      "tag": "v2",
+      "new_sqlite_classes": ["Grants"]
+    }
+  ],
+  "secrets": {
+    "required": ["LOCKJAW_KEK"]
+  },
+  "vars": {
+    "CELL_DID": "did:web:secret-cell.invalid",
+    "CALLER_DOCUMENTS": "[]",
+    "SETTERS": "[]",
+    "APPROVER_DID": "did:web:operator.invalid"
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "name": "lockjaw",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "prepare": "effect-tsgo patch",
+    "typecheck": "effect-tsrs diagnostics --project tsconfig.json --strict && pnpm -r --if-present typecheck",
+    "typecheck:tsc": "tsc --noEmit && tsc --noEmit -p tools/fence/tsconfig.json && pnpm -r --if-present typecheck:tsc",
+    "typecheck:fast": "tsrs --noEmit && pnpm -r --if-present typecheck:fast",
+    "lint": "oxlint --deny-warnings --type-aware .",
+    "format": "oxfmt package.json pnpm-workspace.yaml tsconfig*.json *config.ts packages deploy tools/fence",
+    "format:check": "oxfmt --check package.json pnpm-workspace.yaml tsconfig*.json *config.ts packages deploy tools/fence",
+    "test": "pnpm --filter @lockjaw/client build && vitest run --config vitest.config.ts",
+    "fence": "node tools/fence/cli.ts --mode tree",
+    "fence:history": "node tools/fence/cli.ts --mode history",
+    "fence:check": "effect-tsrs diagnostics --project tools/fence/tsconfig.json --strict && vitest run --config tools/fence/vitest.config.ts && node tools/fence/cli.ts --mode tree --generic",
+    "check": "pnpm typecheck && pnpm lint && pnpm format:check && pnpm test && pnpm fence:check"
+  },
+  "dependencies": {
+    "@xstate/effect": "0.1.0-alpha.7",
+    "effect": "4.0.5",
+    "xstate": "6.0.0-alpha.65"
+  },
+  "devDependencies": {
+    "@effect/platform-node": "4.0.5",
+    "@effect/tsgo": "0.51.1",
+    "@effect/vitest": "4.0.5",
+    "@lockjaw/client": "workspace:*",
+    "@oxlint/plugins": "1.83.0",
+    "@types/node": "24.13.6",
+    "@yielded/effect-tsrs": "0.2.0",
+    "oxfmt": "0.68.0",
+    "oxlint": "1.83.0",
+    "oxlint-tsgolint": "7.0.2002",
+    "tsrs": "0.18.0-ts7.1.0-dev.20260929",
+    "typescript": "7.0.2",
+    "ultracite": "7.12.0",
+    "vitest": "5.0.3"
+  },
+  "engines": {
+    "node": "24.18.0",
+    "pnpm": "11.3.0"
+  },
+  "packageManager": "pnpm@11.3.0"
+}

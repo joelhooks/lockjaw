@@ -1,0 +1,29 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "types": ["node"],
+    "allowImportingTsExtensions": true,
+    "plugins": [
+      {
+        "name": "@effect/language-service",
+        "ignoreEffectWarningsInTscExitCode": false,
+        // Publication tooling runs in Node and owns native IO boundaries.
+        "diagnosticSeverity": {
+          "nodeBuiltinImport": "off",
+          "asyncFunction": "off"
+        },
+        "allowedUnstableApis": [
+          "effect/cli",
+          "@effect/platform-node/NodeRuntime#runMain",
+          "@effect/platform-node/NodeServices#layer",
+          "effect/FileSystem#FileSystem",
+          "effect/Path#Path",
+          "effect/process/ChildProcessSpawner#ChildProcessSpawner",
+          "effect/process/ChildProcess#make",
+          "@effect/vitest#it"
+        ]
+      }
+    ]
+  },
+  "include": ["*.ts", "*.json"]
+}

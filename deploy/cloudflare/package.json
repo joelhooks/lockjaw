@@ -1,0 +1,16 @@
+{
+  "name": "@lockjaw/cloudflare",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "effect-tsrs diagnostics --project tsconfig.json --strict",
+    "typecheck:tsc": "tsc --noEmit -p tsconfig.json",
+    "test": "vitest run --config vitest.config.ts"
+  },
+  "dependencies": {
+    "@effect/platform-node": "4.0.5",
+    "alchemy": "2.0.0-beta.83",
+    "effect": "4.0.5"
+  }
+}

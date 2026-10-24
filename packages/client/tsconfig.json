@@ -1,0 +1,36 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "plugins": [
+      {
+        "name": "@effect/language-service",
+        "ignoreEffectWarningsInTscExitCode": false,
+        // The Node CLI uses native imports and Promise-based IO adapters.
+        "diagnosticSeverity": {
+          "nodeBuiltinImport": "off",
+          "asyncFunction": "off"
+        },
+        "overrides": [
+          // Only the Node HTTP adapter and loopback transport tests use native fetch.
+          {
+            "include": [
+              "src/client.ts",
+              "test/harness.ts",
+              "test/client.test.ts"
+            ],
+            "options": { "diagnosticSeverity": { "globalFetch": "off" } }
+          }
+        ],
+        "allowedUnstableApis": [
+          "@effect/vitest#it",
+          "effect/http/HttpClient#HttpClient",
+          "effect/http/HttpClientRequest#fromWeb",
+          "effect/http/FetchHttpClient#RequestInit",
+          "effect/http/FetchHttpClient#layer"
+        ]
+      }
+    ]
+  },
+  "include": ["src/**/*.ts", "test/**/*.ts"]
+}

@@ -1,0 +1,21 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "plugins": [
+      {
+        "name": "@effect/language-service",
+        "ignoreEffectWarningsInTscExitCode": false,
+        "overrides": [
+          // Web Crypto tests await native key generation and import Promises.
+          {
+            "include": ["test/**/*.ts"],
+            "options": { "diagnosticSeverity": { "asyncFunction": "off" } }
+          }
+        ],
+        "allowedUnstableApis": ["@effect/vitest#it"]
+      }
+    ]
+  },
+  "include": ["src/**/*.ts", "test/**/*.ts", "*.config.ts"]
+}

@@ -1,0 +1,34 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "allowImportingTsExtensions": true,
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "plugins": [
+      {
+        "name": "@effect/language-service",
+        "ignoreEffectWarningsInTscExitCode": false,
+        "overrides": [
+          // Imported Worker RPC and Web Crypto adapters must return native Promises.
+          {
+            "include": ["../../packages/worker/src/**/*.ts"],
+            "options": { "diagnosticSeverity": { "asyncFunction": "off" } }
+          }
+        ],
+        // The deployment imports the Worker's pinned HTTP adapter exports.
+        "allowedUnstableApis": [
+          "@effect/platform-node/NodeServices#layer",
+          "@effect/platform-node/NodeRuntime#runMain",
+          "@effect/vitest#it",
+          "effect/FileSystem#FileSystem",
+          "effect/Path#Path",
+          "effect/http/FetchHttpClient#layer",
+          "effect/http/FetchHttpClient#Fetch",
+          "effect/http/FetchHttpClient#RequestInit",
+          "effect/http/HttpClient#HttpClient",
+          "effect/http/HttpClientRequest#fromWeb"
+        ]
+      }
+    ]
+  },
+  "include": ["*.ts", "test/**/*.ts"]
+}

@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.turbo/
+.pi/notes-bridge/
+.agent_sources/
+*.log
+.brain/
+BRAIN.md
+.fence-tmp/

@@ -1,0 +1,36 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "plugins": [
+      {
+        "name": "@effect/language-service",
+        "ignoreEffectWarningsInTscExitCode": false,
+        "overrides": [
+          // Node-only acceptance tests inspect adapters and await native Web Crypto.
+          {
+            "include": ["test/**/*.ts"],
+            "options": {
+              "diagnosticSeverity": {
+                "nodeBuiltinImport": "off",
+                "asyncFunction": "off"
+              }
+            }
+          },
+          // Only this Node SQL test adapter may import builtins; it never enters the Worker bundle.
+          {
+            "include": ["src/node-sqlite.ts"],
+            "options": { "diagnosticSeverity": { "nodeBuiltinImport": "off" } }
+          }
+        ],
+        // Property tests use the pinned Arbitrary schema and filter exports.
+        "allowedUnstableApis": [
+          "@effect/vitest#it",
+          "effect/Arbitrary#filter",
+          "effect/Arbitrary#schema"
+        ]
+      }
+    ]
+  },
+  "include": ["src/**/*.ts", "test/**/*.ts"]
+}

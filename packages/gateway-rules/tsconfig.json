@@ -1,0 +1,21 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "plugins": [
+      {
+        "name": "@effect/language-service",
+        "ignoreEffectWarningsInTscExitCode": false,
+        "overrides": [
+          // Static-source tests and Oxlint plugins run in Node, not the Worker.
+          {
+            "include": ["test/**/*.ts", "tools/**/*.ts"],
+            "options": { "diagnosticSeverity": { "nodeBuiltinImport": "off" } }
+          }
+        ],
+        "allowedUnstableApis": ["@effect/vitest#it"]
+      }
+    ]
+  },
+  "include": ["src/**/*.ts", "test/**/*.ts", "*.config.ts"]
+}

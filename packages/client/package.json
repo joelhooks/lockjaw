@@ -1,0 +1,23 @@
+{
+  "name": "@lockjaw/client",
+  "private": true,
+  "bin": {
+    "sc": "./bin/sc.js"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "effect-tsrs diagnostics --project tsconfig.json --strict",
+    "typecheck:tsc": "tsc --noEmit -p tsconfig.json",
+    "typecheck:fast": "tsrs --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@ipld/dag-cbor": "10.0.2",
+    "@lockjaw/domain": "workspace:*",
+    "@rat-king/lexicon": "file:../../vendor/rat-king-lexicon-6c1e5d8.tgz",
+    "effect": "4.0.5"
+  },
+  "devDependencies": {
+    "@lockjaw/gateway-rules": "workspace:*"
+  }
+}

@@ -1,0 +1,4 @@
+title = "Lockjaw publication fence"
+
+[extend]
+useDefault = true
