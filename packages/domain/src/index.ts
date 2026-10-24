@@ -62,7 +62,7 @@ export const isPublicHost = (host: string): boolean => {
   return (
     !normalized.includes(":") &&
     !normalized.includes("[") &&
-    !/^\d+$/u.test(normalized.split(".").at(-1) ?? "") &&
+    !/^(?:\d+|0x[0-9a-f]*)$/u.test(normalized.split(".").at(-1) ?? "") &&
     !specialUseSuffixes.some(
       (suffix) => normalized === suffix || normalized.endsWith(`.${suffix}`)
     )

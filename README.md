@@ -73,7 +73,7 @@ pnpm typecheck:tsc
 
 `pnpm fence` additionally uses an operator-owned private inventory; [fence setup](tools/fence/README.md) explains the schema and permissions. `pnpm fence:check` runs generic rules without that inventory.
 
-`vendor/` holds a SHA-256-pinned tarball of `@rat-king/lexicon`, built from the public MIT [Rat King](https://github.com/joelhooks/rat-king) source, because that package is not on npm. The celld layer is a stub until it can pin `@rat-king/alchemy-nest` from the Rat King repo at an exact commit.
+`@rat-king/lexicon` isn't on npm yet, so `vendor/` carries a tarball built from the public MIT [Rat King](https://github.com/joelhooks/rat-king) lexicon source, pinned by SHA-256 in `vendor/rat-king-lexicon.lock.json`. The celld deployment layer depends on `@rat-king/alchemy-nest`, which isn't published either, so it isn't included yet; see [deploy/celld](deploy/celld/README.md).
 
 ## License
 

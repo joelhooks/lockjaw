@@ -48,13 +48,12 @@ celld forbids application `BEGIN` and `SAVEPOINT` through SQL exec (`crates/cell
 
 Phase 1c must supply provider adapters, the alarm schedule (including retry backoff), the DO response/durability boundary and binding loading. Node tests prove local SQLite ordering, not celld replication or bucket durability. Only one `Credential` service instance may own a credential's store at a time.
 
-## Premise checks
+## Platform facts this package relies on
 
-- The lane starts at brief commit `95267bd`, directly above 1a's `2fe522e`. The repository has no remotes. Domain schemas, 18 tagged gateway errors and Placement/Fill/EchoRedactor/Policy are present.
-- Effect `4.0.5`, XState `6.0.0-alpha.65` and `@xstate/effect` `0.1.0-alpha.7` match the brief. The Effect source mirror matches `effect@4.0.5`. The package preserves the exact `@effect/vitest#it` unstable opt-in and the root fence.
+- Effect `4.0.5`, XState `6.0.0-alpha.65` and `@xstate/effect` `0.1.0-alpha.7`. The Effect source mirror matches `effect@4.0.5`. The package preserves the exact `@effect/vitest#it` unstable opt-in and the root fence.
 - celld `docs/README.md` confirms single-thread/await interleaving, synchronous storage and durable alarms before the response boundary. Its fetch admission limit is **64 by default**, not an unconditional maximum: `CELLD_MAX_CELL_REQUESTS` can change it.
 - `docs/cloudflare-compat.md` documents GCM tags from 96 through 128 bits. It does not document an AES-KW guarantee; it forbids JWK secret-key export/wrap. This package uses only AES-GCM with raw import.
-- No Kody source was opened, fetched, searched or cloned. The implementation uses the approved design, 1a contracts, celld docs, and the rat-stack XState example.
+- Clean room: no Kody source was opened, fetched, searched or cloned. The implementation follows its own design, the domain contracts, celld's docs and the rat-stack XState example.
 
 ## Evidence
 
@@ -80,4 +79,4 @@ For git, use a whole Authorization header with `{{secret-basic:user=x-access-tok
 
 GitHub's [JWT documentation](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-json-web-token-jwt-for-a-github-app) recommends backdating `iat` by 60 seconds, permits `exp` at most ten minutes into the future, requires RS256, and accepts an App id as `iss` (it recommends the client id). Its [installation-token documentation](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-an-installation-access-token-for-a-github-app) specifies the access-token POST, optional repository restriction, and one-hour lifetime. This phase mints at installation scope, without a repository restriction.
 
-Starting premise checks: checkout `036a8d5` contains 1a through 1c at `8b952c8`; the existing 59 tests pass. The shitrat-cli protocol matches the brief: RS256 JWT, installation-id lookup, access-token POST, optional repositories, token and expiry response. No client secret handling was copied. The desk relayed a successful celld 0.6.1 RSA/PKCS#8 probe; this lane did not run celld and claims Node proof only. The new end-to-end, canary, non-extractability and red-proof tests are in `packages/worker/test/github-app.test.ts`, `test/github-app.test.ts`, and `test/github-app-red-proof.md`. No real App key, live GitHub request, deployment or push is part of this packet.
+The App flow is the standard one: an RS256 JWT, installation lookup, an access-token POST with optional repositories, and a token-and-expiry response. No client secret is handled. End-to-end, canary, non-extractability and red-proof tests are in `packages/worker/test/github-app.test.ts`, `test/github-app.test.ts` and `test/github-app-red-proof.md`. They use generated keys only.

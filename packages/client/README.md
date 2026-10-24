@@ -145,9 +145,9 @@ Local failures have three lines: `sc <command> failed: ...`, `Why: ...`, `Next: 
 
 ## Wire premises and implementation choice
 
-Built on a descendant of `37ffb7a`. The brief's `FetchRequest` is actually named `GatewayRequest` in `packages/gateway-rules/src/placement.ts`. Set and approve schemas live in `packages/worker/src/gateway.ts`. Audience must equal the Worker's `CELL_DID`; operation lxm is `sh.secretcell.<operation>`, including `fetch` for forwarding. Tokens include a signed `sid`, a 16-byte random base64url `jti`, and `iat`/`exp` at most 60 seconds apart.
+The request shape is `GatewayRequest` in `packages/gateway-rules/src/placement.ts`. Set and approve schemas live in `packages/worker/src/gateway.ts`. Audience must equal the Worker's `CELL_DID`; operation lxm is `sh.secretcell.<operation>`, including `fetch` for forwarding. Tokens include a signed `sid`, a 16-byte random base64url `jti`, and `iat`/`exp` at most 60 seconds apart.
 
-The client implements the request JWS signing boundary with Node Web Crypto, following Rat King's service-token header and claims contract. It imports a non-extractable sign-only CryptoKey. ES256 signatures use the 64-byte JOSE/P1363 Web Crypto form. Signed passes and name tickets use the pinned Rat King lexicon dependency; see the root README for its review-export publication status.
+The client implements the request JWS signing boundary with Node Web Crypto, following Rat King's service-token header and claims contract. It imports a non-extractable sign-only CryptoKey. ES256 signatures use the 64-byte JOSE/P1363 Web Crypto form. Signed passes and name tickets use the pinned Rat King lexicon dependency; see the root README for how it's vendored.
 
 Desk-authorized Worker additions: `GET /v1/describe?name=...` (`sh.secretcell.describe`) and `POST /v1/revoke {name}` (`sh.secretcell.revoke`). Both retain the authentication, replay and use-log path. Describe exposes an explicit metadata projection, including the value version but no value or ciphertext. Revoke accepts a setter or approver. No new secret unwrap site was added.
 

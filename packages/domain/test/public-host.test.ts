@@ -27,6 +27,10 @@ const refused = [
   [100, 64, 1, 1].join("."),
   "127.1",
   "0x7f.1",
+  "0x7f.0x1",
+  "127.0.0.0x1",
+  "a.0x",
+  "0x7f000001",
   "2130706433",
   "[::1]",
   "::1",
@@ -66,6 +70,8 @@ it("public-host policy table keeps public exact and wildcard policies decodable"
     "notinternal.com",
     "example.internal.com",
     "localhost.com",
+    "0x7f.example.com",
+    "api.0xfoo.dev",
   ]) {
     expect(isPublicHost(host), host).toBe(true);
     expect(Schema.is(Host)(host), host).toBe(true);

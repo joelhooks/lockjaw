@@ -17,7 +17,7 @@ Default: `~/.config/rats-nest/instance.json`. Override with `RATS_NEST_INSTANCE`
 
 Literal categories include domains, hosts, addresses, sites, secret names, node aliases and fields, and S3 credential-reference names. Whole reserved documentation names and addresses are not private inventory: loopback names, RFC 2606 domains and their subdomains, RFC 5737 addresses and RFC 3849 addresses. Neighboring real-looking literals still fail. Generic email detection permits only reserved domains and the bot commit identity. The agent-secrets prose rule requires a colon or slash, rather than ordinary words following the product name; exact inventory name matching remains enabled.
 
-There are no content/hash exemptions. `tree-exemption.ts` contains the single temporary `infra/` path exclusion authorized by the private public-split brief. It applies only to tree mode, not staged or history mode. Until infra moves to a private operations repository, a passing tree fence is not permission to publish the whole repository.
+There are no content/hash exemptions. `tree-exemption.ts` holds one path exclusion, `infra/`, for an operator's private deployment code kept beside the public tree. It applies only to tree mode, not staged or history mode.
 
 ## Provenance
 
